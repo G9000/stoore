@@ -3,7 +3,7 @@ import Head from "next/head";
 import { supabase } from "../utils/supabaseClient";
 import { useState } from "react";
 
-const Home: NextPage = () => {
+const AuthView: NextPage = () => {
   const [email, setEmail] = useState<string>();
   const [loading, setLoading] = useState<boolean>();
 
@@ -47,4 +47,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AuthView;
