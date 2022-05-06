@@ -11,19 +11,26 @@ datasource db {
 }
 
 
-model Home {
-  id          String   @id @default(cuid())
-  image       String?
-  title       String
-  description String
-  price       Float
-  guests      Int
-  beds        Int
-  baths       Int
+model User {
+  @@map(name: "user")
+  id          String @id @default(cuid())
+  name        String
+  avatar      String
+  email       String @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  group Group[]
 }
 
-model User {
+model Group {
+  @@map(name: "group")
   id          String @id @default(cuid())
+  name        String
+  image       String
+  description String @db.VarChar(250)
+  recipients  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user User   @relation(fields: [ownerId], references: [id])
+  ownerId     String
 }
