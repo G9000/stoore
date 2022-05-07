@@ -1,38 +1,37 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { getSession, useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
+export async function getServerSideProps(ctx) {
+  // Check if user is authenticated
+  const session = await getSession(ctx);
+
+  // If not, redirect to the homepage
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/authentication",
+        permanent: false,
+      },
+    };
+  }
+
+  // Pass the data to the Homes component
+  return {
+    props: {},
+  };
+}
+
 const Home: NextPage = () => {
-  // const [email, setEmail] = useState("");
-  // console.log("email", email);
-  // const handleRegister = async () => {
-  //   console.log("email", email);
-  //   try {
-  //     // Perform sign in
-  //     const { error } = await signIn("email", {
-  //       redirect: false,
-  //       callbackUrl: window.location.href,
-  //       email,
-  //     });
-  //     // Something went wrong
-  //     if (error) {
-  //       throw new Error(error);
-  //     }
-  //   } catch (err) {
-  //     alert("error");
-  //   } finally {
-  //     console.log("done");
-  //   }
-  // };
   const router = useRouter();
   const isAuthenticated = false;
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/authentication");
-    } else router.push("/");
-  });
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     router.push("/authentication");
+  //   } else router.push("/");
+  // });
 
   return (
     <div>

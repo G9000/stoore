@@ -32,6 +32,7 @@ const AuthView = () => {
         callbackUrl: window.location.href,
         email,
       });
+      console.log("error ??", error);
       if (error) {
         throw new Error(error);
       }
