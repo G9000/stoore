@@ -1,24 +1,38 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { supabase } from "../utils/supabaseClient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
-  const [email, setEmail] = useState<string>();
-  const [loading, setLoading] = useState<boolean>();
-
-  const handleRegister = async (email: string) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signIn({ email });
-      if (error) throw error;
-      alert("Check your email for the login link!");
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const [email, setEmail] = useState("");
+  // console.log("email", email);
+  // const handleRegister = async () => {
+  //   console.log("email", email);
+  //   try {
+  //     // Perform sign in
+  //     const { error } = await signIn("email", {
+  //       redirect: false,
+  //       callbackUrl: window.location.href,
+  //       email,
+  //     });
+  //     // Something went wrong
+  //     if (error) {
+  //       throw new Error(error);
+  //     }
+  //   } catch (err) {
+  //     alert("error");
+  //   } finally {
+  //     console.log("done");
+  //   }
+  // };
+  const router = useRouter();
+  const isAuthenticated = false;
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/authentication");
+    } else router.push("/");
+  });
 
   return (
     <div>
@@ -37,7 +51,7 @@ const Home: NextPage = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            handleRegister(email);
+            handleRegister();
           }}
         >
           Register
