@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { Formik, Form, useField, FieldHookConfig } from "formik";
+import Image from "next/image";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
 
@@ -43,6 +44,14 @@ const AuthView = () => {
     }
   };
 
+  const signInWithGoogle = () => {
+    toast.loading("Redirecting...");
+    setDisabled(true);
+    signIn("google", {
+      callbackUrl: window.location.href,
+    });
+  };
+
   // clear toast
   useEffect(() => {
     toast.dismiss();
@@ -55,6 +64,14 @@ const AuthView = () => {
           <h1 className="text-2xl font-bold">Create your account</h1>
           <p className="mt-2">Take control of your item now</p>
         </div>
+        <button
+          disabled={disabled}
+          onClick={() => signInWithGoogle()}
+          className="h-[45px] w-full mt-8 mx-auto border rounded-md p-2 flex justify-center items-center space-x-2 text-gray-500 hover:text-gray-600 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-100 focus:ring-opacity-25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:hover:border-gray-200 transition-colors"
+        >
+          <Image src="/google.svg" alt="Google" width={32} height={32} />
+          <span>Sign {isSignup ? "up" : "in"} with Google</span>
+        </button>
         <Formik
           initialValues={initialValues}
           validationSchema={SignInSchema}
@@ -62,7 +79,7 @@ const AuthView = () => {
           onSubmit={signInWithEmail}
         >
           {({ isSubmitting, isValid, errors, values }) => (
-            <Form>
+            <Form className="mt-4">
               <Input
                 name="email"
                 type="email"
@@ -72,7 +89,7 @@ const AuthView = () => {
               />
               <button
                 type="submit"
-                className="h-[45px] bg-purple-700 text-white w-full mt-4 disabled:cursor-not-allowed"
+                className="h-[45px] bg-purple-700 rounded-md text-white w-full mt-4 disabled:cursor-not-allowed"
                 disabled={disabled || !isValid}
               >
                 {isSubmitting ? "Loading..." : `Sign ${isSignup ? "up" : "in"}`}
@@ -117,7 +134,7 @@ const Input = (props: FieldHookConfig<string>) => {
 
   return (
     <>
-      <div className="h-[45px] mt-6">
+      <div className="h-[45px]">
         <input
           {...field}
           placeholder={props.placeholder}
@@ -125,8 +142,8 @@ const Input = (props: FieldHookConfig<string>) => {
           disabled={props.disabled}
           className={
             meta.touched && meta.error
-              ? "pl-4 w-full h-full border border-red-600 outline outline-offset outline-4 outline-red-100"
-              : "pl-4 w-full h-full border focus:outline outline-offset outline-4 outline-gray-100"
+              ? "pl-4 w-full h-full rounded-md border border-red-600 outline outline-offset outline-4 outline-red-100"
+              : "pl-4 w-full h-full rounded-md border focus:ring-4 focus:outline-none focus:ring-gray-300 focus:ring-opacity-25"
           }
         />
       </div>
