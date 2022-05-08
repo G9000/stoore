@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap"); */
 
 html,
 body {
@@ -23,4 +24,12 @@ a {
   --primaryWhite: hsla(335, 38%, 92%, 1);
   --primaryBlack: hsla(200, 9%, 7%, 1);
   --primaryBrandRed: hsla(360, 87%, 63%, 1);
+
+  --primaryGreen800: hsla(190, 73%, 19%, 1);
+  --primaryGreen400: hsla(146, 46%, 50%, 1);
+  --primaryGreen200: hsla(137, 77%, 67%, 1);
+}
+
+.btn-primary {
+  @apply px-6 h-[38px] flex items-center gap-x-2 rounded-lg;
 }
