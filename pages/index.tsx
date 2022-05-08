@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import { getSession, useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 export async function getServerSideProps(ctx) {
   // Check if user is authenticated
   const session = await getSession(ctx);
-
   // If not, redirect to the homepage
+
   if (!session) {
     return {
       redirect: {
@@ -18,20 +17,22 @@ export async function getServerSideProps(ctx) {
     };
   }
 
-  // Pass the data to the Homes component
+  console.log("current session", session);
+
   return {
-    props: {},
+    props: {
+      session,
+    },
   };
 }
 
 const Home: NextPage = () => {
   const router = useRouter();
   const isAuthenticated = false;
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     router.push("/authentication");
-  //   } else router.push("/");
-  // });
+
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  // console.log("user", user);
 
   return (
     <div>
@@ -41,7 +42,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      {/* <main>
         <input
           type="email"
           placeholder="Email"
@@ -55,7 +56,7 @@ const Home: NextPage = () => {
         >
           Register
         </button>
-      </main>
+      </main> */}
     </div>
   );
 };

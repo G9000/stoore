@@ -18,3 +18,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --primaryWhite: hsla(335, 38%, 92%, 1);
+  --primaryBlack: hsla(200, 9%, 7%, 1);
+  --primaryBrandRed: hsla(360, 87%, 63%, 1);
+}

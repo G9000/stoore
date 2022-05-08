@@ -32,42 +32,65 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String   @id @default(cuid())
+  sessionToken      String   @unique
+  userId            String
+  expires           DateTime
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  avatar        String?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                String  @id @default(cuid())
+  name              String?
+  email             String? @unique
+  avatar            String?
+  image             String?
+  emailVerified     DateTime?
+  accounts Account[]
+  sessions Session[]
   groups Group[]
+  creator Item[]
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+  identifier        String
+  token             String  @unique
+  expires           DateTime
 
   @@unique([identifier, token])
 }
 
 
 model Group {
-  id          String @id @default(cuid())
-  name        String
-  image       String?
-  description String? @db.VarChar(250)
-  recipients  Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  creator User   @relation(fields: [creatorId], references: [id])
-  creatorId     String
+  id              String @id @default(cuid())
+  name            String
+  image           String?
+  description     String? @db.VarChar(250)
+  recipients      Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  creator User    @relation(fields: [creatorId], references: [id])
+  creatorId       String
+  items Item[]
+}
+
+model Item {
+  id              Int @id @default(autoincrement())
+  name            String
+  image           String?
+  description     String? @db.VarChar(250)
+  qrCodeImage     String?
+  quantity        Int
+  condition      String?
+  status          String?
+  statusDescription String? @db.VarChar(250)
+  availability    Boolean?
+  serialNumber    String?
+  brand           String?
+  parent Group    @relation(fields: [groupId], references: [id])
+  groupId         String
+  createdBy User  @relation(fields: [createdById], references: [id])
+  createdById     String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

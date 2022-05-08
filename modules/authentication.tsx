@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../libs/supabaseClient";
 import { useState } from "react";
 
 const AuthView: NextPage = () => {

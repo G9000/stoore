@@ -3,12 +3,10 @@ import EmailProvider from "next-auth/providers/email";
 import nodemailer from "nodemailer";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../libs/prisma";
 import Handlebars from "handlebars";
 import path from "path";
 import { readFileSync } from "fs";
-
-const prisma = new PrismaClient();
 
 // Email
 const transporter = nodemailer.createTransport({
