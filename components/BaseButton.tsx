@@ -1,4 +1,5 @@
 import { TiAdjustBrightness } from "react-icons/ti";
+import { HiMenuAlt4 } from "react-icons/hi";
 
 export const ButtonThemeSwitcher = () => {
   const isDark = true;
@@ -10,6 +11,16 @@ export const ButtonThemeSwitcher = () => {
         }
       >
         <TiAdjustBrightness />
+      </span>
+    </button>
+  );
+};
+
+export const HamburgerMenu = () => {
+  return (
+    <button className="px-2 h-[38px] rounded-lg bg-primaryGreen800">
+      <span className="text-[24px] text-gray-100">
+        <HiMenuAlt4 />
       </span>
     </button>
   );

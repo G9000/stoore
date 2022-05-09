@@ -1,9 +1,24 @@
 import { useState, useEffect } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { Formik, Form, useField, FieldHookConfig } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
+
+export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {};
+};
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
