@@ -2,7 +2,7 @@ import axios from "axios";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { useState, useEffect } from "react";
-import { HiX } from "react-icons/hi";
+import { HiX, HiPlus } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
@@ -18,7 +18,12 @@ const CreateGroupModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button>Click here</button>
+        <button className="px-6 h-[40px] flex items-center gap-x-4 rounded-lg bg-gray-100 border border-gray-200 text-primaryGreen800 font-bold hover:bg-slate-200">
+          <span className="text-xl">
+            <HiPlus />
+          </span>
+          Create a new Group
+        </button>
       </Dialog.Trigger>
       {isOpen && (
         <Dialog.Portal>
@@ -53,7 +58,7 @@ const Overlay = () => {
   return <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />;
 };
 
-const Content = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+const Content = ({ children }: { children: React.ReactNode }) => {
   return (
     <Dialog.Content className="fixed max-h-screen h-auto max-w-[450px] w-[90vw] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white py-6 px-4">
       {children}
@@ -147,7 +152,7 @@ const ModalField = ({
   );
 };
 
-const InputErrorMessage = ({ children }: { children?: string }) => {
+const InputErrorMessage = ({ children }: { children: React.ReactNode }) => {
   return (
     <span role="alert" className="text-sm mt">
       {children}

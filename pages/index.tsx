@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { HiPlus } from "react-icons/hi";
 import CreateGroupModal from "@/components/ModalCreateGroup";
 
-export async function getServerSideProps(ctx) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // Check if user is authenticated
   const session = await getSession(ctx);
   // If not, redirect to the homepage
@@ -26,7 +26,7 @@ export async function getServerSideProps(ctx) {
       session,
     },
   };
-}
+};
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -68,16 +68,5 @@ const MetaHead = () => {
       <meta name="description" content="Take control of your item now" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-  );
-};
-
-const CreateGroupBtn = () => {
-  return (
-    <button className="px-6 h-[40px] flex items-center gap-x-4 rounded-lg bg-gray-100 border border-gray-200 text-primaryGreen800 font-bold hover:bg-slate-200">
-      <span className="text-xl">
-        <HiPlus />
-      </span>
-      Create a new Group
-    </button>
   );
 };

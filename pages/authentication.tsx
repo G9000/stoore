@@ -178,7 +178,7 @@ const Overlay = () => {
   );
 };
 
-const Content = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+const Content = ({ children }: { children: React.ReactNode }) => {
   return (
     <AlertDialog.Content className="fixed max-h-screen h-auto max-w-[450px] w-[90vw] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white py-6 px-4">
       {children}
