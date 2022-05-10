@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { signIn, getSession } from "next-auth/react";
-import { Formik, Form, useField, FieldHookConfig } from "formik";
+import { GetServerSideProps } from "next";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
+import * as AlertDialog from "@radix-ui/react-alert-dialog";
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
   if (session) {
@@ -34,8 +37,15 @@ interface FormType {
 const AuthView = () => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const [isSignup, setIsSignup] = useState<boolean>(true);
+  // const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const initialValues: FormType = { email: "" };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormType>({
+    resolver: yupResolver(SignInSchema),
+  });
 
   const signInWithEmail = async ({ email }: FormType) => {
     let toastId;
@@ -56,6 +66,7 @@ const AuthView = () => {
     } finally {
       toast.success("Sign up successful", { id: toastId });
       setDisabled(false);
+      // setIsOpen(true);
     }
   };
 
@@ -87,85 +98,90 @@ const AuthView = () => {
           <Image src="/google.svg" alt="Google" width={32} height={32} />
           <span>Sign {isSignup ? "up" : "in"} with Google</span>
         </button>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={SignInSchema}
-          validateOnBlur={false}
-          onSubmit={signInWithEmail}
-        >
-          {({ isSubmitting, isValid, errors, values }) => (
-            <Form className="mt-4">
-              <Input
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                disabled={disabled}
-                spellCheck={false}
-              />
-              <button
-                type="submit"
-                className="h-[45px] bg-purple-700 rounded-md text-white w-full mt-4 disabled:cursor-not-allowed"
-                disabled={disabled || !isValid}
-              >
-                {isSubmitting ? "Loading..." : `Sign ${isSignup ? "up" : "in"}`}
-              </button>
-              {isSignup ? (
-                <div className="mt-4 text-sm text-gray-500 text-center">
-                  Already have an account?{" "}
-                  <button
-                    type="button"
-                    disabled={disabled}
-                    className="text-purple-700 font-semibold disabled:cursor-not-allowed"
-                    onClick={() => setIsSignup(false)}
-                  >
-                    Log in
-                  </button>
-                </div>
-              ) : (
-                <div className="mt-4 text-sm text-gray-500 text-center">
-                  Don&#39;t have an account yet?{" "}
-                  <button
-                    type="button"
-                    disabled={disabled}
-                    className="text-purple-700 font-semibold disabled:cursor-not-allowed"
-                    onClick={() => setIsSignup(true)}
-                  >
-                    Sign up
-                  </button>
-                </div>
-              )}
-            </Form>
+
+        <form onSubmit={handleSubmit(signInWithEmail)} className="mt-2">
+          <input
+            id="email"
+            {...register("email", { required: true })}
+            type="text"
+            aria-invalid={errors.email ? "true" : "false"}
+            placeholder="sign in with email"
+            className={
+              errors.email
+                ? "pl-4 w-full h-[45px] rounded-md border border-red-600 outline outline-offset outline-4 outline-red-100"
+                : "pl-4 w-full h-[45px] rounded-md border focus:ring-4 focus:outline-none focus:ring-gray-300 focus:ring-opacity-25"
+            }
+          />
+          {errors.email && (
+            <span role="alert" className="text-sm mt">
+              {errors.email?.message}
+            </span>
           )}
-        </Formik>
+
+          <button
+            type="submit"
+            className="h-[45px] bg-primaryGreen800 rounded-md text-white w-full disabled:cursor-not-allowed mt-6"
+            aria-label="Close"
+            disabled={disabled}
+          >
+            {isSignup ? "Sign up" : "Sign in"}
+          </button>
+        </form>
+        {isSignup ? (
+          <div className="mt-4 text-sm text-gray-500 text-center">
+            Already have an account?{" "}
+            <button
+              type="button"
+              disabled={disabled}
+              className="text-purple-700 font-semibold disabled:cursor-not-allowed"
+              onClick={() => setIsSignup(false)}
+            >
+              Log in
+            </button>
+          </div>
+        ) : (
+          <div className="mt-4 text-sm text-gray-500 text-center">
+            Don&#39;t have an account yet?{" "}
+            <button
+              type="button"
+              disabled={disabled}
+              className="text-purple-700 font-semibold disabled:cursor-not-allowed"
+              onClick={() => setIsSignup(true)}
+            >
+              Sign up
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* <AlertDialog.Root open={isOpen} onOpenChange={setIsOpen}>
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+          <Content>
+            <div className="flex justify-between">
+              <AlertDialog.Title className="font-bold text-gray-600 text-md">
+                Create Group
+              </AlertDialog.Title>
+            </div>
+          </Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root> */}
     </div>
   );
 };
 
 export default AuthView;
 
-const Input = (props: FieldHookConfig<string>) => {
-  const [field, meta] = useField(props);
-
+const Overlay = () => {
   return (
-    <>
-      <div className="h-[45px]">
-        <input
-          {...field}
-          placeholder={props.placeholder}
-          type={props.type}
-          disabled={props.disabled}
-          className={
-            meta.touched && meta.error
-              ? "pl-4 w-full h-full rounded-md border border-red-600 outline outline-offset outline-4 outline-red-100"
-              : "pl-4 w-full h-full rounded-md border focus:ring-4 focus:outline-none focus:ring-gray-300 focus:ring-opacity-25"
-          }
-        />
-      </div>
+    <AlertDialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+  );
+};
 
-      {meta.touched && meta.error && (
-        <div className="text-sm mt-2">{meta.error}</div>
-      )}
-    </>
+const Content = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+  return (
+    <AlertDialog.Content className="fixed max-h-screen h-auto max-w-[450px] w-[90vw] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white py-6 px-4">
+      {children}
+    </AlertDialog.Content>
   );
 };

@@ -1,9 +1,9 @@
 import axios from "axios";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as LabelPrimitive from "@radix-ui/react-label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiX } from "react-icons/hi";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { toast } from "react-hot-toast";
@@ -89,7 +89,7 @@ const ModalField = ({
   } = useForm<FieldType>({
     resolver: yupResolver(groupSchema),
   });
-  // const onSubmit = (data: FieldType) => axios.post("/api/group", data);
+
   const onSubmit = async (data: FieldType) => {
     let toastId;
     toastId = toast.loading("Loading...");
@@ -105,6 +105,11 @@ const ModalField = ({
     }
     modalStatus(false);
   };
+
+  // clear toast
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
