@@ -11,7 +11,8 @@
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.3",
     "@prisma/client": "^3.13.0",
-    "@radix-ui/react-popover": "0.1.6",
+    "@radix-ui/react-dialog": "^0.1.7",
+    "@radix-ui/react-dropdown-menu": "^0.1.6",
     "@supabase/supabase-js": "^1.35.2",
     "formik": "^2.2.9",
     "handlebars": "^4.7.7",
@@ -26,13 +27,11 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.10",
     "@types/node": "17.0.31",
     "@types/nodemailer": "^6.4.4",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",
     "autoprefixer": "^10.4.7",
-    "babel-loader": "^8.2.5",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.6",
