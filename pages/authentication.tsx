@@ -17,7 +17,7 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  return {};
+  return { props: {} };
 };
 
 const SignInSchema = Yup.object().shape({
@@ -47,7 +47,6 @@ const AuthView = () => {
         callbackUrl: window.location.href,
         email,
       });
-      console.log("error ??", error);
       if (error) {
         throw new Error(error);
       }

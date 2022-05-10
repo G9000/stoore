@@ -3,7 +3,7 @@ import EmailProvider from "next-auth/providers/email";
 import nodemailer from "nodemailer";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "../../../libs/prisma";
+import prisma from "@/libs/prisma";
 import Handlebars from "handlebars";
 import path from "path";
 import { readFileSync } from "fs";

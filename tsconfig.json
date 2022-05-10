@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/modules/*": ["modules/*"]
+      "@/modules/*": ["modules/*"],
+      "@/libs/*": ["libs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
