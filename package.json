@@ -16,6 +16,7 @@
     "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-dropdown-menu": "^0.1.6",
     "@radix-ui/react-label": "^0.1.5",
+    "@radix-ui/react-switch": "^0.1.5",
     "@supabase/supabase-js": "^1.35.2",
     "axios": "^0.27.2",
     "handlebars": "^4.7.7",
