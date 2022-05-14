@@ -5,14 +5,14 @@ import { Toaster } from "react-hot-toast";
 import Layout from "@/components/Layouts";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  return (
-    <AuthProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-      <Toaster />
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider session={session}>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+            <Toaster />
+        </AuthProvider>
+    );
 }
 
 export default MyApp;

@@ -1,35 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap"); */
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 :root {
-  --primaryWhite: hsla(335, 38%, 92%, 1);
-  --primaryBlack: hsla(200, 9%, 7%, 1);
-  --primaryBrandRed: hsla(360, 87%, 63%, 1);
+    --primaryWhite: hsla(335, 38%, 92%, 1);
+    --primaryBlack: hsla(200, 9%, 7%, 1);
+    --primaryBrandRed: hsla(360, 87%, 63%, 1);
 
-  --primaryGreen800: hsla(190, 73%, 19%, 1);
-  --primaryGreen400: hsla(146, 46%, 50%, 1);
-  --primaryGreen200: hsla(137, 77%, 67%, 1);
+    --primaryGreen800: hsla(190, 73%, 19%, 1);
+    --primaryGreen400: hsla(146, 46%, 50%, 1);
+    --primaryGreen200: hsla(137, 77%, 67%, 1);
 }
 
 .btn-primary {
-  @apply px-6 h-[38px] flex items-center gap-x-2 rounded-lg;
+    @apply px-6 h-[38px] flex items-center gap-x-2 rounded-lg;
 }
