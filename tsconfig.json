@@ -18,7 +18,8 @@
         "paths": {
             "@/components/*": ["components/*"],
             "@/modules/*": ["modules/*"],
-            "@/libs/*": ["libs/*"]
+            "@/libs/*": ["libs/*"],
+            "@/primitives/*": ["primitives/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
