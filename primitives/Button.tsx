@@ -15,11 +15,7 @@ export const Button = ({
     return (
         <button
             type="button"
-            className={[
-                "storybook-button",
-                `storybook-button--${size}`,
-                mode,
-            ].join(" ")}
+            className="bg-purple-200 py-4 px-2 text-red border rounded-full"
             {...props}
         >
             {label}

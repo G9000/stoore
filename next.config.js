@@ -2,7 +2,11 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ["<random_string>.supabase.in", "lh3.googleusercontent.com"],
+        domains: [
+            "images.pexels.com",
+            "<random_string>.supabase.in",
+            "lh3.googleusercontent.com",
+        ],
     },
 };
 

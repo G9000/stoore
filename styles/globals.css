@@ -30,7 +30,3 @@ a {
     --primaryGreen400: hsla(146, 46%, 50%, 1);
     --primaryGreen200: hsla(137, 77%, 67%, 1);
 }
-
-.btn-primary {
-    @apply px-6 h-[38px] flex items-center gap-x-2 rounded-lg;
-}

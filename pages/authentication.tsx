@@ -7,6 +7,7 @@ import Image from "next/image";
 import * as Yup from "yup";
 import { toast } from "react-hot-toast";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import { Button } from "@/primitives/Button";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const session = await getSession(ctx);
@@ -103,7 +104,6 @@ const AuthView = () => {
                     />
                     <span>Sign {isSignup ? "up" : "in"} with Google</span>
                 </button>
-
                 <form onSubmit={handleSubmit(signInWithEmail)} className="mt-2">
                     <input
                         id="email"
