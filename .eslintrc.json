@@ -7,6 +7,7 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:storybook/recommended",
         "next/core-web-vitals",
         "prettier"
     ],
@@ -19,5 +20,14 @@
         "sourceType": "module"
     },
     "plugins": ["react", "@typescript-eslint"],
-    "rules": {}
+    "rules": {},
+    "overrides": [
+        {
+            "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+            "rules": {
+                "storybook/hierarchy-separator": "error",
+                "storybook/default-exports": "off"
+            }
+        }
+    ]
 }
