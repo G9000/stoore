@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const user = session?.user as authType;
 
     return (
-        <div className="flex">
+        <div className="flex gap-x-16">
             <SidebarNav user={user} />
             <div>{children}</div>
         </div>

@@ -10,7 +10,9 @@
         "prettier:check": "npx prettier --check .",
         "prettier:fix": "npx prettier --write .",
         "lint": "npx eslint .",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "dependencies": {
         "@hookform/resolvers": "^2.8.8",
@@ -37,8 +39,17 @@
         "yup": "^0.32.11"
     },
     "devDependencies": {
+        "@babel/core": "^7.17.12",
         "@commitlint/cli": "^16.3.0",
         "@commitlint/config-conventional": "^16.2.4",
+        "@storybook/addon-actions": "^6.4.22",
+        "@storybook/addon-essentials": "^6.4.22",
+        "@storybook/addon-interactions": "^6.4.22",
+        "@storybook/addon-links": "^6.4.22",
+        "@storybook/builder-webpack5": "^6.4.22",
+        "@storybook/manager-webpack5": "^6.4.22",
+        "@storybook/react": "^6.4.22",
+        "@storybook/testing-library": "^0.0.11",
         "@types/node": "17.0.31",
         "@types/nodemailer": "^6.4.4",
         "@types/prop-types": "^15.7.5",
@@ -47,12 +58,14 @@
         "@typescript-eslint/eslint-plugin": "^5.23.0",
         "@typescript-eslint/parser": "^5.23.0",
         "autoprefixer": "^10.4.7",
+        "babel-loader": "^8.2.5",
         "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^8.14.0",
         "eslint-config-next": "12.1.6",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-storybook": "^0.5.12",
         "husky": "^8.0.0",
         "lint-staged": "^12.4.1",
         "postcss": "^8",
